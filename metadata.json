@@ -1,6 +1,0 @@
-{
-  "name": "Storage App",
-  "description": "A simple storage app that saves files to Firebase Storage.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
