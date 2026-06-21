@@ -1,0 +1,29 @@
+name: Kotlin to APK Compiler
+
+on:
+  push:
+    branches: [ "main" ] # Runs automatically when you upload code
+  workflow_dispatch:     # Adds a manual "Run Workflow" button in GitHub
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Download your Kotlin code into the cloud runner
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      # Step 2: Use the marketplace action to build the project into an APK
+      - name: Build Android APK
+        uses: jonasbayer/build-android-app-action@v1.1
+        with:
+          # This compiles the debug version of your Kotlin app
+          gradle-task: assembleDebug 
+
+      # Step 3: Extract the generated APK so you can download it
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-kotlin-apk
+          path: app/build/outputs/apk/debug/*.apk
